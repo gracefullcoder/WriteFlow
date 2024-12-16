@@ -1,8 +1,16 @@
 import { sign } from 'hono/jwt'
 import { Context } from "hono";
+import { signinInput, signupInput } from '@vaibhavgupta11/writeflow_validation'
 
-const createUser = async (c:Context) => {
-    const { email, password } = await c.req.json();
+const createUser = async (c: Context) => {
+    const body = await c.req.json();
+    const success = signupInput.safeParse(body);
+
+    if (!success) {
+        throw new Error("invalid input")
+    }
+
+    const { email, password } = body;
     const prisma = c.get("prisma")
 
     let userData = await prisma.user.findUnique({ where: { email } });
@@ -25,8 +33,15 @@ const createUser = async (c:Context) => {
 }
 
 
-const signInUser = async (c:Context) => {
-    const { email, password } = await c.req.json()
+const signInUser = async (c: Context) => {
+    const body = await c.req.json();
+    const success = signupInput.safeParse(body);
+
+    if (!success) {
+        throw new Error("invalid input")
+    }
+    
+    const { email, password } = body
     const prisma = c.get("prisma")
 
     const user = await prisma.user.findUnique({
@@ -47,4 +62,4 @@ const signInUser = async (c:Context) => {
     return c.json({ jwt: token });
 }
 
-export {createUser,signInUser}
+export { createUser, signInUser }

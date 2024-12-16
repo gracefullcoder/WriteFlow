@@ -21,6 +21,7 @@ app.use("/api/v1/blog/*", async (c, next) => {
 
     if (!token) return c.json({ error: "Not an authorized user" })
     // const token = jwt.split(' ')[1]; //if 'Bearer xyztoken'
+
     const response = await verify(token, c.env.JWT_SECRET)
 
     if (!response.id) {
@@ -47,9 +48,8 @@ app.route("/api/v1/blog",blog)
 
 
 app.onError((err, c) => {
-  console.error("Error occurred:", err); // Log the error (optional)
+  console.error("Error occurred:", err);
 
-  // Return a generic error response
   return c.json(
     {
       success: false,
