@@ -18,7 +18,7 @@ function Auth({ type }: { type: "SignIn" | "SignUp" }) {
         console.log(import.meta.env.VITE_SERVER);
         const res = await axios.post(`${import.meta.env.VITE_SERVER}/user/signin`,details);
         localStorage.setItem("token", res.data.jwt);
-        navigate("/blog/all`");
+        navigate("/blog`");
     }
 
     return (
