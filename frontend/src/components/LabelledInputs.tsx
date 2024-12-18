@@ -1,4 +1,3 @@
-import React from 'react';
 import { SignupType } from '@vaibhavgupta11/writeflow_validation';
 
 interface Inputs {

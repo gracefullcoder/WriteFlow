@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SignupType } from '@vaibhavgupta11/writeflow_validation';
 import LabelledInputs from './LabelledInputs';
 import { Link, useNavigate } from 'react-router-dom';
