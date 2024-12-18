@@ -5,9 +5,9 @@ import wrapAsync from "../utils/WrapAsync";
 
 const blog = new Hono<Environment>();
 
-blog.get('/:id', getBlog)
-
 blog.get('/bulk/all', wrapAsync(allBlogs))
+
+blog.get('/:id', getBlog)
 
 blog.post('/', createBlog)
 

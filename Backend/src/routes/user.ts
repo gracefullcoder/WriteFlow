@@ -5,8 +5,8 @@ import wrapAsync from "../utils/WrapAsync";
 
 const User = new Hono<Environment>();
 
-User.post('/api/v1/signup', wrapAsync(createUser))
+User.post('/signup', wrapAsync(createUser))
 
-User.post('/api/v1/signin', wrapAsync(signInUser))
+User.post('/signin', wrapAsync(signInUser))
 
 export default User

@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import Environment from './utils/HonoEnv'
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
@@ -8,6 +9,8 @@ import blog from './routes/blog'
 import User from './routes/user'
 
 const app = new Hono<Environment>()
+
+app.use('/*',cors())
 
 //middlewares
 app.use("*", async (c, next) => {
@@ -34,7 +37,7 @@ app.use("/api/v1/blog/*", async (c, next) => {
 })
 //
 
-app.get('/', async (c) => {
+app.get('/', async (c) => { 
   const prisma = c.get("prisma")
   const res = await prisma.user.findMany();
   console.log(res)
@@ -42,7 +45,7 @@ app.get('/', async (c) => {
 })
 
 //routes
-app.route("/api/1/user",User)
+app.route("/api/v1/user",User)
 
 app.route("/api/v1/blog",blog)
 
